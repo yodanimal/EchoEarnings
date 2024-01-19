@@ -32,11 +32,16 @@ This project is a PowerShell-based Salary Calculator that allows users to calcul
 
    .\Main.ps1
    
-## Future Enhancements
+## Future Enhancements **
 
 - Error handling and logging.
 - Configurable parameters.
-- Integration with a WPF GUI for a more user-friendly interface.
+- Add a selectable US State to determine State Tax numbers.
+- Add in other input fields to set budget amounts to make a realistic paycheck experience.
+- Add color to the app.
+- Add an output function to save the data as an html file. 
+- Replace GUI with a Web application.
+- Live webapp.
 
 ## Development
 
