@@ -17,11 +17,9 @@ $taxBrackets = @(
     @{ Limit = [decimal]::MaxValue; Rate = 0.37 }
 )
 
-function CalculateWagesAndTaxes {
-    param (
-        [string]$inputType,
-        [decimal]$value
-    )
+function CalculateWagesAndTaxes([string]$inputType, [decimal]$value) {
+    [OutputType([ordered])]
+    $results = @{}
 
     # Calculate annual salary and hourly wage
     if ($inputType -eq 'H') {
@@ -54,12 +52,12 @@ function CalculateWagesAndTaxes {
     # After-tax bi-weekly paycheck
     $afterTaxBiWeeklyPaycheck = $afterTaxIncome / ($weeksPerYear / 2)
 
-    # Format results for display
-    $results = "Annual Salary (Before Tax): $(Format-Currency $annualSalary)`r`n" +
-               "Annual Salary (After Tax): $(Format-Currency $afterTaxIncome)"
-               "Hourly Wage: $(Format-Currency $hourlyWage)`r`n" +
-               "Bi-Weekly Paycheck (Before Tax): $(Format-Currency $biWeeklyPaycheck)`r`n" +
-               "Bi-Weekly Paycheck (After Tax): $(Format-Currency $afterTaxBiWeeklyPaycheck)"
+    # return results for display as ordered dictionary
+    $results['Annual Salary (Before Tax)'] = $(Format-Currency $annualSalary)
+    $results['Annual Salary (After Tax)'] = $(Format-Currency $afterTaxIncome)
+    $results['Hourly Wage'] = $(Format-Currency $hourlyWage)
+    $results['Bi-Weekly Paycheck (Before Tax)'] = $(Format-Currency $biWeeklyPaycheck)
+    $results['Bi-Weekly Paycheck (After Tax)'] = $(Format-Currency $afterTaxBiWeeklyPaycheck)
 
     return $results
 }
