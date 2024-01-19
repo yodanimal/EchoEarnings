@@ -1,6 +1,11 @@
 # Scripts\OutputHandler.ps1
 # This script is responsible for formatting and displaying the results.
 
+function Show-ErrorMessage([string]$Message) {
+    Write-Host "ERROR:" -NoNewline -BackgroundColor DarkRed -ForegroundColor White
+    Write-Host " $($Message)" -ForegroundColor Red
+}
+
 function Show-Results {
     param (
         [string]$results

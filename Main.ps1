@@ -2,6 +2,8 @@
 # This script is the entry point of the application.
 # It allows the user to choose between the console and GUI interfaces.
 
+. .\Scripts\OutputHandler.ps1
+
 # Run the GUI or Console script based on user choice
 $interfaceMode = Read-Host "Enter 'C' for Console Interface or 'G' for GUI Interface"
 
@@ -10,7 +12,6 @@ if ($interfaceMode -eq 'C') {
     # Import scripts for console-based interaction
     . .\Scripts\InputHandler.ps1
     . .\Scripts\Calculator.ps1
-    . .\Scripts\OutputHandler.ps1
 
     # Get input type and values
     $inputType, $value = Get-UserInput
@@ -25,7 +26,11 @@ if ($interfaceMode -eq 'C') {
 elseif ($interfaceMode -eq 'G') {
     # GUI Interface
     # Run the GUI script
-    . .\GUI\GUI.ps1
+    if ($IsWindows) {
+        . .\GUI\GUI.ps1
+    } else {
+        Show-ErrorMessage "Only Microsoft Windows is supported for GUI mode"
+    }
 }
 else {
     Write-Host "Invalid input. Please enter 'C' for Console or 'G' for GUI."
