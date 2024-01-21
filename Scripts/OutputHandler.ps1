@@ -6,12 +6,27 @@ function Show-ErrorMessage([string]$Message) {
     Write-Host " $($Message)" -ForegroundColor Red
 }
 
-function Show-Results {
-    param (
-        [string]$results
-    )
 
-    Write-Host $results
+function Show-InputPromptMessage([string]$Message) {
+    # see https://rogierdijkman.medium.com/use-bold-font-in-write-host-b4b8155a8208
+    $FormattedMessage = (ConvertFrom-Markdown -InputObject $Message -AsVT100EncodedString).VT100EncodedString
+    Read-Host $FormattedMessage.Trim()
+}
+
+function Show-OutputMessage([string]$Message, [string]$Value) {
+    # see https://rogierdijkman.medium.com/use-bold-font-in-write-host-b4b8155a8208
+    if ($Value) {
+        Write-Host $Message -NoNewline -BackgroundColor DarkBlue -ForegroundColor White
+        Write-Host ": $($Value)" -ForegroundColor DarkBlue
+    } else {
+        Show-OutputFormattedMessage $Message
+    }
+}
+
+function Show-OutputFormattedMessage([string]$Message) {
+    # see https://rogierdijkman.medium.com/use-bold-font-in-write-host-b4b8155a8208
+    $FormattedMessage = (ConvertFrom-Markdown -InputObject $Message -AsVT100EncodedString).VT100EncodedString
+    Write-Host $FormattedMessage -ForegroundColor DarkBlue
 }
 
     # Future Enhancement:
