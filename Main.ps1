@@ -18,7 +18,8 @@ if ($interfaceMode -eq 'C') {
 
     # Calculate wages and taxes
     $results = CalculateWagesAndTaxes -inputType $inputType -value $value
-    Write-Host
+
+    Write-Host "`nResults"
     Show-OutputFormattedMessage "**RESULTS**"
 
     # Output the results
