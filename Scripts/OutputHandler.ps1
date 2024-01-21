@@ -6,6 +6,7 @@ function Show-ErrorMessage([string]$Message) {
     Write-Host " $($Message)" -ForegroundColor Red
 }
 
+
 function Show-InputPromptMessage([string]$Message) {
     # see https://rogierdijkman.medium.com/use-bold-font-in-write-host-b4b8155a8208
     $FormattedMessage = (ConvertFrom-Markdown -InputObject $Message -AsVT100EncodedString).VT100EncodedString

@@ -32,7 +32,11 @@ if ($interfaceMode -eq 'C') {
 elseif ($interfaceMode -eq 'G') {
     # GUI Interface
     # Run the GUI script
-    . .\GUI\GUI.ps1
+    if ($IsWindows) {
+        . .\GUI\GUI.ps1
+    } else {
+        Show-ErrorMessage "Only Microsoft Windows is supported for GUI mode"
+    }
 }
 else {
     Show-ErrorMessage "Invalid input. Please enter 'C' for Console or 'G' for GUI."
