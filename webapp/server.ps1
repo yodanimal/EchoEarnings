@@ -1,5 +1,4 @@
 Import-Module Pode.Web
-. ../Scripts/Calculator
 
 function Get-ResultsDump([System.Collections.Specialized.OrderedDictionary]$Results) {
     foreach ($KeyValuePair in $Results.GetEnumerator()) {
@@ -9,13 +8,12 @@ function Get-ResultsDump([System.Collections.Specialized.OrderedDictionary]$Resu
     }
 }
 
-$global:CalculationType = $null
-$global:CalculationValue = $null
-
 # see https://devblogs.microsoft.com/scripting/incorporating-pipelined-input-into-powershell-functions/
 function Get-FormInputAndCalculate([string]$InputType, [string]$InputValue) {
     [OutputType([ordered])]
     $OutputResults = $null
+
+    . ../Scripts/Calculator.ps1
 
     if ($null -ne $InputType -and $InputType -notmatch '^\s*$' -and
         $null -ne $InputValue -and $InputValue -notmatch '^\s*$') {
