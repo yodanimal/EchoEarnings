@@ -6,7 +6,7 @@ $hoursPerDay = 8
 $daysPerWeek = 5
 $weeksPerYear = 52
 
-# U.S. Federal Tax Brackets for a Single Filer (Example for 2023)
+# 2023 U.S. Federal Tax Brackets
 $taxBrackets = @(
     @{ Limit = 10275;   Rate = 0.10 },
     @{ Limit = 41775;   Rate = 0.12 },
