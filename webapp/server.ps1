@@ -1,4 +1,5 @@
 Import-Module Pode.Web
+. ../Scripts/Calculator.ps1
 
 function Get-ResultsDump([System.Collections.Specialized.OrderedDictionary]$Results) {
     foreach ($KeyValuePair in $Results.GetEnumerator()) {
@@ -12,8 +13,6 @@ function Get-ResultsDump([System.Collections.Specialized.OrderedDictionary]$Resu
 function Get-FormInputAndCalculate([string]$InputType, [string]$InputValue) {
     [OutputType([ordered])]
     $OutputResults = $null
-
-    . ../Scripts/Calculator.ps1
 
     if ($null -ne $InputType -and $InputType -notmatch '^\s*$' -and
         $null -ne $InputValue -and $InputValue -notmatch '^\s*$') {
