@@ -40,7 +40,7 @@ $calculateButton.Add_Click({
     }
 
     # Calculate wages and taxes based on the input
-    $results = CalculateWagesAndTaxes -inputType $inputType -value $value
+    $results = Get-CalculateWagesAndTaxes -inputType $inputType -value $value
 
     # Display the results in the output text box
     $outputText.Text = $results

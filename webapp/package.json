@@ -1,0 +1,19 @@
+{
+  "author": "Rick Evans",
+  "scripts": {
+    "install": "yarn install --force --ignore-scripts --modules-folder pode_modules",
+    "start": "./server.ps1",
+    "test": "invoke-pester ./tests/*.ps1",
+    "build": "psake"
+  },
+  "main": "./server.ps1",
+  "version": "1.0.0",
+  "name": "EchoEarnings",
+  "license": "MIT",
+  "description": "The goal is to calculate wages and taxes based on user input",
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.3",
+    "lodash": "^4.17.21"
+  }
+}
