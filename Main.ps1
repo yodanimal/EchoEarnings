@@ -1,15 +1,12 @@
 # Main.ps1
-# This script is the entry point of the application.
-# It allows the user to choose between the console and GUI interfaces.
-
 . .\Scripts\OutputHandler.ps1
 
-# Run the GUI or Console script based on user choice
+# User picks: GUI or Console
 $interfaceMode = Show-InputPromptMessage "Enter **C** for Console Interface or **G** for GUI Interface"
 
 if ($interfaceMode -eq 'C') {
     # Console Interface
-    # Import scripts for console-based interaction
+    # Dot-source to InputHandler and Calculator
     . .\Scripts\InputHandler.ps1
     . .\Scripts\Calculator.ps1
 

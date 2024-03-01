@@ -7,6 +7,14 @@
 
     .PARAMETER inputType
     Are the wages to be calculated based on hourly (H) or an annual salary (S)
+    according to the 2023 U.S. Federal Tax Brackets of:
+        Limit = 10275,    Rate = 0.10
+        Limit = 41775,    Rate = 0.12
+        Limit = 89075,    Rate = 0.22
+        Limit = 170050,   Rate = 0.24
+        Limit = 215950,   Rate = 0.32
+        Limit = 539900,   Rate = 0.3
+        Limit = MaxValue, Rate = 0.37
 
     .PARAMETER value
     Either and hourly rate value or an annual salary value
