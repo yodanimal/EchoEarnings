@@ -1,3 +1,17 @@
+<#
+    .SYNOPSIS
+    Show a web interface for Echo Earnings
+
+    .DESCRIPTION
+    To start the server do the following:
+        PS> cd webapp
+        PS> Import-Module Pode.Web
+        PS> ./server.ps1
+
+    or alternatively:
+        PS> cd webapp
+        PS> pode start
+#>
 Import-Module Pode.Web
 . ../Scripts/Calculator.ps1
 
@@ -40,7 +54,7 @@ Start-PodeServer {
     Add-PodeEndpoint -Address localhost -Port 8080 -Protocol Http
 
     # see https://badgerati.github.io/Pode.Web/Functions/Utilities/Use-PodeWebTemplates/
-    Use-PodeWebTemplates -Title 'EchoEarnings' -Theme Dark
+    Use-PodeWebTemplates -Title 'EchoEarnings' -Theme Dark -Security None
 
     Set-PodeWebHomePage -Layouts @(
         # see https://badgerati.github.io/Pode.Web/Functions/Layouts/New-PodeWebHero/
