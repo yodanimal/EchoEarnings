@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <#
     .SYNOPSIS
     Show a web interface for Echo Earnings
@@ -39,6 +40,22 @@ function Get-ResultsAsTableData([string]$Results) {
     return $OutputData
 }
 
+=======
+Import-Module Pode.Web
+. ../Scripts/Calculator
+
+function Get-ResultsDump([System.Collections.Specialized.OrderedDictionary]$Results) {
+    foreach ($KeyValuePair in $Results.GetEnumerator()) {
+        $Key = $KeyValuePair.Name
+        $Value = $KeyValuePair.Value
+        Write-Host "Get-ResultsDump: Key=$($Key), Value=$($Value)"
+    }
+}
+
+$global:CalculationType = $null
+$global:CalculationValue = $null
+
+>>>>>>> 2fdc32f (1st pass at web app using Pode.Web)
 # see https://devblogs.microsoft.com/scripting/incorporating-pipelined-input-into-powershell-functions/
 function Get-FormInputAndCalculate([string]$InputType, [string]$InputValue) {
     [OutputType([ordered])]
@@ -47,6 +64,7 @@ function Get-FormInputAndCalculate([string]$InputType, [string]$InputValue) {
     if ($null -ne $InputType -and $InputType -notmatch '^\s*$' -and
         $null -ne $InputValue -and $InputValue -notmatch '^\s*$') {
 
+<<<<<<< HEAD
         # Write-Host "Get-FormInputAndCalculate: Type=$($InputType), Value=$($InputValue)"
 
         try {
@@ -59,6 +77,20 @@ function Get-FormInputAndCalculate([string]$InputType, [string]$InputValue) {
             $ResultData | Update-PodeWebTable -Name 'OutputTable' -TotalItemCount 5
         } catch {
             Write-Host "ERROR:" -BackgroundColor Red -ForegroundColor White
+=======
+        $DecimalValue = [decimal]$InputValue
+        Write-Host "Get-FormInputAndCalculate: Type=$($InputType), Value=$($DecimalValue)"
+
+        try {
+            $OutputResults = Get-CalculateWagesAndTaxes $InputType $DecimalValue
+            Get-ResultsDump $OutputResults
+
+            $ResultsTitle = 'Results'
+            Update-PodeWebText -Id 'ResultsTitle' -Value $ResultsTitle
+            Update-PodeWebTable -Id 'OutputTable' -Data $OutputResults
+        } catch {
+            Write-Host "ERROR:"
+>>>>>>> 2fdc32f (1st pass at web app using Pode.Web)
             Write-Host $_
         }
     }
@@ -70,7 +102,11 @@ Start-PodeServer {
     Add-PodeEndpoint -Address localhost -Port 8080 -Protocol Http
 
     # see https://badgerati.github.io/Pode.Web/Functions/Utilities/Use-PodeWebTemplates/
+<<<<<<< HEAD
     Use-PodeWebTemplates -Title 'EchoEarnings' -Theme Dark -Security None
+=======
+    Use-PodeWebTemplates -Title 'EchoEarnings' -Theme Dark
+>>>>>>> 2fdc32f (1st pass at web app using Pode.Web)
 
     Set-PodeWebHomePage -Layouts @(
         # see https://badgerati.github.io/Pode.Web/Functions/Layouts/New-PodeWebHero/
@@ -115,7 +151,11 @@ Start-PodeServer {
             New-PodeWebText -Id 'ResultsTitle' -Value $ResultsTitle
 
             # see https://badgerati.github.io/Pode.Web/Functions/Elements/New-PodeWebTable/
+<<<<<<< HEAD
             New-PodeWebTable -Name 'OutputTable' -NoExport -NoRefresh -NoAuthentication -Compact
+=======
+            New-PodeWebTable -Name 'OutputTable'
+>>>>>>> 2fdc32f (1st pass at web app using Pode.Web)
         )
     )
 }
