@@ -13,14 +13,30 @@
         PS> pode start
 #>
 Import-Module Pode.Web
-. ../Scripts/Calculator.ps1
 
-function Get-ResultsDump([System.Collections.Specialized.OrderedDictionary]$Results) {
-    foreach ($KeyValuePair in $Results.GetEnumerator()) {
-        $Key = $KeyValuePair.Name
-        $Value = $KeyValuePair.Value
-        Write-Host "Get-ResultsDump: Key=$($Key), Value=$($Value)"
+function Invoke-LocalScript([string]$ScriptFileName, [string]$Type, [string]$Value) {
+    $WebAppLocation = Join-Path -Path (Get-Location) -ChildPath 'webapp'
+    $PathToScript = Join-Path -Path $WebAppLocation -ChildPath $ScriptFileName
+
+    Invoke-Expression -Command "$PathToScript -type $Type -value $Value" -OutVariable OutputResults
+    # Write-Host "Invoke-LocalScript: Output=<$($OutputResults)>"
+ 
+    return $OutputResults
+}
+
+function Get-ResultsAsTableData([string]$Results) {
+    [OutputType([ordered])]
+    $OutputData = @{}
+
+    $JSON = ConvertFrom-Json $Results -AsHashtable
+
+    # see https://badgerati.github.io/Pode.Web/Tutorials/Elements/Table/#data
+    foreach ($Key in $JSON.Keys) {
+        $OutputData[$Key] = $JSON[$Key]
+        # Write-Host "Get-ResultsAsTableData: Key=$($Key), Value=$($JSON.$Key)"
     }
+
+    return $OutputData
 }
 
 # see https://devblogs.microsoft.com/scripting/incorporating-pipelined-input-into-powershell-functions/
@@ -31,18 +47,18 @@ function Get-FormInputAndCalculate([string]$InputType, [string]$InputValue) {
     if ($null -ne $InputType -and $InputType -notmatch '^\s*$' -and
         $null -ne $InputValue -and $InputValue -notmatch '^\s*$') {
 
-        $DecimalValue = [decimal]$InputValue
-        Write-Host "Get-FormInputAndCalculate: Type=$($InputType), Value=$($DecimalValue)"
+        # Write-Host "Get-FormInputAndCalculate: Type=$($InputType), Value=$($InputValue)"
 
         try {
-            $OutputResults = Get-CalculateWagesAndTaxes $InputType $DecimalValue
-            Get-ResultsDump $OutputResults
+            $OutputResults = Invoke-LocalScript 'WebCalculator.ps1' $InputType $InputValue
 
-            $ResultsTitle = 'Results'
-            Update-PodeWebText -Id 'ResultsTitle' -Value $ResultsTitle
-            Update-PodeWebTable -Id 'OutputTable' -Data $OutputResults
+            # using -OutVariable requires an array so just use the first element
+            $ResultData = Get-ResultsAsTableData $OutputResults[0]
+
+            Update-PodeWebText -Id 'ResultsTitle' -Value 'Results'
+            $ResultData | Update-PodeWebTable -Name 'OutputTable' -TotalItemCount 5
         } catch {
-            Write-Host "ERROR:"
+            Write-Host "ERROR:" -BackgroundColor Red -ForegroundColor White
             Write-Host $_
         }
     }
@@ -99,7 +115,7 @@ Start-PodeServer {
             New-PodeWebText -Id 'ResultsTitle' -Value $ResultsTitle
 
             # see https://badgerati.github.io/Pode.Web/Functions/Elements/New-PodeWebTable/
-            New-PodeWebTable -Name 'OutputTable'
+            New-PodeWebTable -Name 'OutputTable' -NoExport -NoRefresh -NoAuthentication -Compact
         )
     )
 }

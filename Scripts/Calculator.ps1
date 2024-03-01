@@ -71,7 +71,7 @@ function Get-CalculateWagesAndTaxes([string]$inputType, [decimal]$value) {
     [OutputType([ordered])]
     $results = @{}
 
-    Write-Host "Get-CalculateWagesAndTaxes: Type=$($inputType), Value=$($value)"
+    #Write-Host "Get-CalculateWagesAndTaxes: Type=$($inputType), Value=$($value)"
 
     # Calculate annual salary and hourly wage
     if ($inputType -eq 'H') {
