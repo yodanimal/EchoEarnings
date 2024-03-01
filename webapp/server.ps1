@@ -70,11 +70,7 @@ Start-PodeServer {
     Add-PodeEndpoint -Address localhost -Port 8080 -Protocol Http
 
     # see https://badgerati.github.io/Pode.Web/Functions/Utilities/Use-PodeWebTemplates/
-<<<<<<< HEAD
     Use-PodeWebTemplates -Title 'EchoEarnings' -Theme Dark -Security None
-=======
-    Use-PodeWebTemplates -Title 'EchoEarnings' -Theme Dark
->>>>>>> 2fdc32f (1st pass at web app using Pode.Web)
 
     Set-PodeWebHomePage -Layouts @(
         # see https://badgerati.github.io/Pode.Web/Functions/Layouts/New-PodeWebHero/
@@ -119,11 +115,7 @@ Start-PodeServer {
             New-PodeWebText -Id 'ResultsTitle' -Value $ResultsTitle
 
             # see https://badgerati.github.io/Pode.Web/Functions/Elements/New-PodeWebTable/
-<<<<<<< HEAD
             New-PodeWebTable -Name 'OutputTable' -NoExport -NoRefresh -NoAuthentication -Compact
-=======
-            New-PodeWebTable -Name 'OutputTable'
->>>>>>> 2fdc32f (1st pass at web app using Pode.Web)
         )
     )
 }
