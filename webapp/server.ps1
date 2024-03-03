@@ -5,7 +5,8 @@
     .DESCRIPTION
     To start the server do the following:
         PS> cd webapp
-        PS> Import-Module Pode.Web
+        PS> Import-Module Pode.Web 
+        PS> Get-Module -ListAvailable Pode.Web 
         PS> ./server.ps1
 
     or alternatively:
@@ -74,7 +75,7 @@ Start-PodeServer {
 
     Set-PodeWebHomePage -Layouts @(
         # see https://badgerati.github.io/Pode.Web/Functions/Layouts/New-PodeWebHero/
-        New-PodeWebHero -Title 'Welcome to Echo Earnings' -Message 'This site calculates wages and taxes based on your input' -Content @(
+        New-PodeWebHero -Title 'Calculate your current or desired Salary' -Message 'This site calculates wages and taxes based on the 2023 US Tax Brackets' -Content @(
             # see https://badgerati.github.io/Pode.Web/Functions/Elements/New-PodeWebLink/
             New-PodeWebLink -Value 'Access Calculator' -Source '/pages/Salary_Calculator'
         )
