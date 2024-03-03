@@ -12,6 +12,15 @@
     or alternatively:
         PS> cd webapp
         PS> pode start
+
+    Updated are not instant. 
+        PS> Ctrl+C  # Terminate Pode web app and run .\server.ps1 to view changes
+
+    Pode -Dev Mode
+        PS> Start-PodeServer -DevMode
+        Automatically refreshes routes, middleware, and endpoints for development changes.
+
+
 #>
 Import-Module Pode.Web
 
