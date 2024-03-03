@@ -76,6 +76,7 @@ function Format-CalculatorCurrency([decimal]$value) {
 }
 
 function Get-CalculateWagesAndTaxes([string]$inputType, [decimal]$value) {
+
     [OutputType([ordered])]
     $results = @{}
 
