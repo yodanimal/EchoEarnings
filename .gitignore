@@ -1,3 +1,4 @@
 /webapp/pode_modules
 /webapp/node_modules
 *.lock
+.vscode
