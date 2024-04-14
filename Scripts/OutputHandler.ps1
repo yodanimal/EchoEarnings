@@ -29,6 +29,3 @@ function Show-OutputFormattedMessage([string]$Message) {
     Write-Host $FormattedMessage -ForegroundColor DarkBlue
 }
 
-    # Future Enhancement:
-    # This function can be expanded to include more sophisticated formatting
-    # or even exporting results to a file or different output medium.
