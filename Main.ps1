@@ -26,7 +26,7 @@ if ($interfaceMode -eq 'C') {
 }
 elseif ($interfaceMode -eq 'G') {
     # GUI Interface
-    # Run the GUI script
+    # Run GUI script
     if ($IsWindows) {
         . .\GUI\GUI.ps1
     } else {
