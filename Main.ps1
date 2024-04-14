@@ -10,7 +10,6 @@ if ($interfaceMode -eq 'C') {
     . .\Scripts\InputHandler.ps1
     . .\Scripts\Calculator.ps1
 
-    # Get input type and values
     $inputType, $value = Get-UserInput
 
     # Calculate wages and taxes
