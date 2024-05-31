@@ -5,15 +5,15 @@
     .DESCRIPTION
     To start the server do the following:
         PS> cd webapp
-        PS> Import-Module Pode.Web 
-        PS> Get-Module -ListAvailable Pode.Web 
+        PS> Import-Module Pode.Web
+        PS> Get-Module -ListAvailable Pode.Web
         PS> ./server.ps1
 
     or alternatively:
         PS> cd webapp
         PS> pode start
 
-    Updated are not instant. 
+    Updated are not instant.
         PS> Ctrl+C  # Terminate Pode web app and run .\server.ps1 to view changes
 
     Pode -Dev Mode
@@ -30,7 +30,7 @@ function Invoke-LocalScript([string]$ScriptFileName, [string]$Type, [string]$Val
 
     Invoke-Expression -Command "$PathToScript -type $Type -value $Value" -OutVariable OutputResults
     # Write-Host "Invoke-LocalScript: Output=<$($OutputResults)>"
- 
+
     return $OutputResults
 }
 
@@ -77,7 +77,7 @@ function Get-FormInputAndCalculate([string]$InputType, [string]$InputValue) {
 }
 
 Start-PodeServer {
-    Add-PodeEndpoint -Address localhost -Port 8080 -Protocol Http
+    Add-PodeEndpoint -Address localhost -Port 8081 -Protocol Http
 
     # see https://badgerati.github.io/Pode.Web/Functions/Utilities/Use-PodeWebTemplates/
     Use-PodeWebTemplates -Title 'EchoEarnings' -Theme Dark -Security None
@@ -113,7 +113,7 @@ Start-PodeServer {
             } -Content @(
                 # see https://badgerati.github.io/Pode.Web/Functions/Elements/New-PodeWebRadio/
                 New-PodeWebRadio -Name 'InputType' -DisplayName 'Input Type' -Required -Options @('H', 'S') -DisplayOptions @('Hourly Wage', 'Annual Salary')
-                
+
                 # see https://badgerati.github.io/Pode.Web/Functions/Elements/New-PodeWebTextbox/
                 New-PodeWebTextbox -Name 'InputValue' -DisplayName 'Input Value' -Required -Type Text
             )
