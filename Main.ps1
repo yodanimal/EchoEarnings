@@ -36,3 +36,7 @@ elseif ($interfaceMode -eq 'G') {
 else {
     Show-ErrorMessage "Invalid input. Please enter 'C' for Console or 'G' for GUI."
 }
+
+<#
+    you should do this here
+#>

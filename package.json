@@ -2,7 +2,7 @@
   "description": "EchoEarnings WebApp",
   "author": "dan",
   "main": "localhost:8080",
-  "name": "EchoEarnings",
+  "name": "echoearnings",
   "scripts": {
     "test": "invoke-pester ./tests/*.ps1",
     "start": "localhost:8080",
