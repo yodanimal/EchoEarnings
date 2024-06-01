@@ -9,9 +9,9 @@
         PS> Get-Module -ListAvailable Pode.Web
         PS> ./server.ps1
 
-    or alternatively:
-        PS> cd webapp
-        PS> pode start
+        or alternatively:
+            PS> cd webapp
+            PS> pode start
 
     Updated are not instant.
         PS> Ctrl+C  # Terminate Pode web app and run .\server.ps1 to view changes
@@ -51,7 +51,7 @@ function Get-ResultsAsTableData([string]$Results) {
 
 # see https://devblogs.microsoft.com/scripting/incorporating-pipelined-input-into-powershell-functions/
 function Get-FormInputAndCalculate([string]$InputType, [string]$InputValue) {
-    [OutputType([ordered])]
+    [OutputType([hashtable])]
     $OutputResults = $null
 
     if ($null -ne $InputType -and $InputType -notmatch '^\s*$' -and
